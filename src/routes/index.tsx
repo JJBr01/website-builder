@@ -1,35 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import heroSpeed from "@/assets/hero-speed.jpg";
-import { pageHead } from "@/lib/site";
+import { jsonLd, pageHead, websiteSchema } from "@/lib/site";
+import { services } from "@/lib/services";
 
 
 export const Route = createFileRoute("/")({
-  head: () => pageHead("/", "MOD 12 — Independent Digital Studio", "MOD 12 designs and builds high-performing websites for ambitious brands ready to move forward."),
+  head: () => ({ ...pageHead("/", "MOD 12 — Web Design & Development Studio | Sarasota, FL", "MOD 12 is an independent web design and development studio in Sarasota, Florida. Thoughtful strategy, distinctive design and fast websites for ambitious brands."), scripts: [jsonLd(websiteSchema)] }),
   component: Index,
 });
 
-const services = [
-  {
-    number: '01',
-    title: 'Strategy & direction',
-    text: 'Positioning, user journeys, and a clear digital roadmap built around your business goals.',
-  },
-  {
-    number: '02',
-    title: 'Design that performs',
-    text: 'Distinctive, conversion-minded interfaces that make your brand feel considered at every touchpoint.',
-  },
-  {
-    number: '03',
-    title: 'Development',
-    text: 'Fast, responsive websites engineered for a seamless launch and effortless growth.',
-  },
-]
-
 function Index() {
   return (
-    <main className="overflow-hidden bg-paper text-ink">
-      <section className="relative min-h-[92vh] px-5 pb-12 pt-5 sm:px-8 lg:px-14 lg:pb-16">
+    <>
+      <section data-hero className="relative min-h-[92vh] px-5 pb-12 pt-5 sm:px-8 lg:px-14 lg:pb-16">
         <div className="speed-line absolute right-0 top-0 h-full w-[42%] bg-brand" />
         <div aria-hidden="true" className="h-[65px] md:h-[61px]" />
 
@@ -40,12 +23,14 @@ function Index() {
               alt="Long-exposure red and black motion streaks racing across a warm paper background"
               width={1600}
               height={800}
+              loading="eager"
+              fetchPriority="high"
               className="h-[20vh] w-full rounded-[1.5rem] object-cover object-center ring-1 ring-ink/10 sm:h-[26vh] lg:h-[30vh]"
             />
           </div>
           <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-ink/55">
             <span className="h-px w-10 bg-brand" />
-            Independent digital studio
+            Web design &amp; development · Sarasota, FL
           </p>
           <h1 className="max-w-[1100px] text-[clamp(4.2rem,11vw,10rem)] font-semibold leading-[0.82] tracking-[-0.075em]">
             Ideas built
@@ -53,7 +38,7 @@ function Index() {
           </h1>
           <div className="mt-9 flex flex-col gap-8 border-t border-ink/15 pt-6 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-lg leading-relaxed text-ink/65">
-              We design and build high-performing websites for ambitious brands ready to move forward.
+              We bring web design and development together to build high-performing websites for ambitious brands ready to move forward.
             </p>
             <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em]">
               <span className="relative flex size-2">
@@ -71,6 +56,7 @@ function Index() {
           <div>
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand">What we do</p>
             <h2 className="max-w-md text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">From first thought to finish line.</h2>
+            <Link to="/services" className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-snow underline decoration-brand underline-offset-8">See all services <span aria-hidden="true">→</span></Link>
           </div>
           <div className="self-center border-t border-snow/20">
             {services.map((service) => (
@@ -105,6 +91,6 @@ function Index() {
         </div>
       </section>
 
-    </main>
+    </>
   )
 }
