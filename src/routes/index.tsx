@@ -65,7 +65,6 @@ function Index() {
             <Wordmark />
           </a>
           <div className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.14em] md:flex">
-            <a className="transition-opacity hover:opacity-50" href="#work">Work</a>
             <a className="transition-opacity hover:opacity-50" href="#services">Services</a>
             <a className="transition-opacity hover:opacity-50" href="#about">About</a>
           </div>
