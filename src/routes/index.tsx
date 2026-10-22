@@ -42,7 +42,7 @@ function Index() {
             </p>
             <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em]">
               <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-40" />
+                <span className="absolute inline-flex size-full motion-safe:animate-ping rounded-full bg-brand opacity-40" />
                 <span className="relative inline-flex size-2 rounded-full bg-brand" />
               </span>
               Now booking new projects
@@ -62,7 +62,7 @@ function Index() {
             {services.map((service) => (
               <article key={service.number} className="group grid gap-5 border-b border-snow/20 py-8 sm:grid-cols-[80px_1fr_1fr] sm:py-10">
                 <span className="font-mono text-xs text-brand">{service.number}</span>
-                <h3 className="text-2xl font-semibold tracking-[-0.03em] transition-transform group-hover:translate-x-1">{service.title}</h3>
+                <h3 className="text-2xl font-semibold tracking-[-0.03em] motion-safe:transition-transform motion-safe:group-hover:translate-x-1">{service.title}</h3>
                 <p className="text-sm leading-relaxed text-snow/60">{service.text}</p>
               </article>
             ))}
@@ -73,7 +73,7 @@ function Index() {
       <section id="about" className="bg-brand px-5 py-20 text-snow sm:px-8 lg:px-14 lg:py-28">
         <div className="grid items-end gap-16 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
-            <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-snow/60">Small team. Serious momentum.</p>
+            <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-snow">Small team. Serious momentum.</p>
             <p className="max-w-4xl text-4xl font-medium leading-[1.05] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
               No bloated teams or slow handoffs. Just senior thinking, sharp execution, and a direct line from idea to impact.
             </p>
@@ -81,11 +81,11 @@ function Index() {
           <div className="flex gap-10 border-t border-snow/30 pt-6 lg:block">
             <div className="lg:mb-10">
               <strong className="block text-2xl font-semibold">One point of contact</strong>
-              <span className="text-sm text-snow/70">You work directly with the person building your site.</span>
+              <span className="text-sm text-snow">You work directly with the person building your site.</span>
             </div>
             <div>
               <strong className="block text-2xl font-semibold">You own everything</strong>
-              <span className="text-sm text-snow/70">Code, content and accounts are yours at launch.</span>
+              <span className="text-sm text-snow">Code, content and accounts are yours at launch.</span>
             </div>
           </div>
         </div>

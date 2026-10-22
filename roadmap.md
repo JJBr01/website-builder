@@ -1,3 +1,8 @@
+# Accessibility and bug fixes
+- [x] Improve inquiry focus, scroll locking, labels, validation, announcements and bounded email fallback.
+- [x] Fix small-text contrast, reduced motion, menu labeling and unpublished metadata.
+- [x] Run all 14 regression tests and verify desktop/mobile keyboard flows, opener focus restoration and actual submit-to-fallback (1798-character URL); automatic build passes.
+
 # Navigation and SEO
 - [x] Add Services and Contact pages and real-page navigation.
 - [x] Add active links, pinned header, skip link, accessible drawer, footer navigation and branded 404.

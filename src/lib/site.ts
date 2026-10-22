@@ -20,7 +20,7 @@ export function pageHead(path: string, title: string, description: string) {
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: siteUrl(path) },
+      ...(SITE_URL ? [{ property: "og:url", content: siteUrl(path) }] : []),
       { name: "twitter:card", content: "summary_large_image" },
       // Image tags require an absolute public URL. Activate them once SITE_URL is known.
       ...(SITE_URL ? [
@@ -28,7 +28,7 @@ export function pageHead(path: string, title: string, description: string) {
         { name: "twitter:image", content: siteUrl(DEFAULT_OG_IMAGE) },
       ] : []),
     ],
-    links: [{ rel: "canonical", href: siteUrl(path) }],
+    links: SITE_URL ? [{ rel: "canonical", href: siteUrl(path) }] : [],
   };
 }
 

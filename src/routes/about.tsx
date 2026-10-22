@@ -26,7 +26,7 @@ function About() {
       </section>
       <section className="bg-brand px-5 py-20 text-snow sm:px-8 lg:px-14 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
-          <div><p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-snow/60">Who's behind it</p><h2 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">Justin James.</h2></div>
+          <div><p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-snow">Who's behind it</p><h2 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">Justin James.</h2></div>
           <p className="max-w-3xl self-center text-2xl font-medium leading-relaxed sm:text-3xl">MOD 12 is led by Justin James, a web developer and designer with a background in web development, graphic design and automation engineering, based in the Sarasota / Tampa area of Florida and working with clients anywhere.</p>
         </div>
       </section>
