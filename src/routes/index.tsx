@@ -113,55 +113,6 @@ function Index() {
         </div>
       </section>
 
-      <section id="work" className="bg-ink px-5 py-24 text-snow sm:px-8 lg:px-14 lg:py-36">
-        <div className="mb-16 flex items-end justify-between">
-          <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand">Selected work</p>
-            <h2 className="text-4xl font-semibold tracking-[-0.04em] sm:text-6xl">Built to lead.</h2>
-          </div>
-          <p className="hidden max-w-xs text-sm leading-relaxed text-snow/45 md:block">
-            Every project is designed to sharpen your position and turn attention into action.
-          </p>
-        </div>
-
-        <div className="flex flex-col">
-          {projects.map((p) => (
-            <div key={p.name} className="group grid overflow-hidden border-t border-snow/15 last:border-b lg:grid-cols-[1.6fr_1fr]">
-              <div className={`relative min-h-[380px] overflow-hidden p-8 sm:min-h-[520px] sm:p-12 ${p.frame}`}>
-                <div className="absolute inset-x-[8%] top-[12%] bottom-0 rotate-[-3deg] rounded-t-xl bg-cream p-3 shadow-2xl transition-transform duration-700 group-hover:rotate-0 group-hover:scale-[1.02]">
-                  <div className={`flex h-full flex-col overflow-hidden rounded-lg p-6 ${p.screen}`}>
-                    <div className="flex items-center justify-between border-b border-current/30 pb-4 text-[10px] font-bold uppercase tracking-widest opacity-80">
-                      <span>{p.label}</span><span>Menu</span>
-                    </div>
-                    <div className="flex flex-1 items-center">
-                      <p className="whitespace-pre-line text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.82] tracking-[-0.07em]">{p.headline}</p>
-                    </div>
-                    <div className="h-14 w-14 rounded-full border border-current opacity-50" />
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between px-1 py-8 lg:p-10">
-                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-snow/45">
-                  <span>{p.category}</span><span>{p.year}</span>
-                </div>
-                <div className="mt-16 lg:mt-24">
-                  <h3 className="text-4xl font-semibold tracking-[-0.04em]">{p.name}</h3>
-                  <p className="mt-4 max-w-sm leading-relaxed text-snow/50">{p.text}</p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span key={t} className="rounded-full border border-snow/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-snow/60">{t}</span>
-                    ))}
-                  </div>
-                  <a href="#contact" className="mt-8 inline-flex items-center gap-3 border-b border-snow/30 pb-2 text-xs font-bold uppercase tracking-[0.16em] transition-colors hover:border-brand hover:text-brand">
-                    View project <Arrow />
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section id="services" className="border-0 bg-transparent px-5 py-24 shadow-none sm:px-8 lg:px-14 lg:py-36">
         <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
           <div>
