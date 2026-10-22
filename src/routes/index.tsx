@@ -112,18 +112,18 @@ function Index() {
         </div>
       </section>
 
-      <section id="services" className="border-0 bg-transparent px-5 py-24 shadow-none sm:px-8 lg:px-14 lg:py-36">
+      <section id="services" className="bg-ink px-5 py-24 text-snow sm:px-8 lg:px-14 lg:py-36">
         <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
           <div>
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand">What we do</p>
             <h2 className="max-w-md text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">From first thought to finish line.</h2>
           </div>
-          <div className="self-center border-t border-ink/20">
+          <div className="self-center border-t border-snow/20">
             {services.map((service) => (
-              <article key={service.number} className="group grid gap-5 border-b border-ink/20 py-8 sm:grid-cols-[80px_1fr_1fr] sm:py-10">
+              <article key={service.number} className="group grid gap-5 border-b border-snow/20 py-8 sm:grid-cols-[80px_1fr_1fr] sm:py-10">
                 <span className="font-mono text-xs text-brand">{service.number}</span>
                 <h3 className="text-2xl font-semibold tracking-[-0.03em] transition-transform group-hover:translate-x-1">{service.title}</h3>
-                <p className="text-sm leading-relaxed text-ink/55">{service.text}</p>
+                <p className="text-sm leading-relaxed text-snow/60">{service.text}</p>
               </article>
             ))}
           </div>
