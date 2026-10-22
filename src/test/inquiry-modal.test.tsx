@@ -23,7 +23,7 @@ describe('Accessible inquiry behavior', () => {
     expect(document.body.style.overflow).toBe('clip');
   });
   it('associates name errors and focuses the first invalid field', async () => {
-    open(); submit();
+    open(); selectScope(); submit();
     const name = screen.getByLabelText('Name');
     expect(name).toHaveAttribute('aria-invalid', 'true');
     expect(name).toHaveAccessibleDescription('Please enter your name.');
@@ -41,11 +41,17 @@ describe('Accessible inquiry behavior', () => {
   });
   it('associates the scope error and focuses the first scope chip', async () => {
     open();
-    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Justin' } });
-    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'justin@example.com' } });
     submit();
     const chip = screen.getByRole('button', { name: 'Branding' });
-    expect(chip).toHaveAccessibleDescription('Pick at least one scope.');
+    const group = screen.getByRole('group', { name: 'Scope' });
+    expect(group).toHaveAccessibleDescription('Pick at least one scope.');
+    expect(group).not.toHaveAttribute('aria-invalid');
+    expect(chip).not.toHaveAttribute('aria-describedby');
+    for (const button of group.querySelectorAll('button')) {
+      expect(button).not.toHaveAttribute('aria-invalid');
+    }
+    expect(screen.getByLabelText('Name')).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByLabelText('Email')).toHaveAttribute('aria-invalid', 'true');
     await waitFor(() => expect(chip).toHaveFocus());
   });
   it('associates notes errors with the notes field', async () => {
