@@ -65,12 +65,24 @@ function Index() {
             <a className="transition-opacity hover:opacity-50" href="#services">Services</a>
             <a className="transition-opacity hover:opacity-50" href="#about">About</a>
           </div>
-          <a
-            href="#contact"
-            className="group flex items-center gap-3 rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-snow transition-transform hover:-translate-y-0.5"
-          >
-            Start a project <Arrow />
-          </a>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setInquiryOpen(true)}
+              className="group hidden items-center gap-3 rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-snow transition-transform hover:-translate-y-0.5 sm:flex"
+            >
+              Start a project <Arrow />
+            </button>
+            <button
+              type="button"
+              aria-label="Open menu"
+              onClick={() => setMenuOpen(true)}
+              className="flex size-11 flex-col items-center justify-center gap-[5px] rounded-full bg-ink md:hidden"
+            >
+              <span className="h-[2px] w-5 bg-snow" />
+              <span className="h-[2px] w-5 bg-snow" />
+            </button>
+          </div>
         </nav>
 
         <div className="relative z-10 flex min-h-[calc(92vh-92px)] flex-col justify-end pt-24">
@@ -108,44 +120,51 @@ function Index() {
           </p>
         </div>
 
-        <div className="group grid overflow-hidden border-y border-snow/15 lg:grid-cols-[1.6fr_1fr]">
-          <div className="project-visual relative min-h-[420px] overflow-hidden bg-stone p-8 sm:min-h-[560px] sm:p-12">
-            <div className="absolute inset-x-[8%] top-[12%] bottom-0 rotate-[-3deg] rounded-t-xl bg-cream p-3 shadow-2xl transition-transform duration-700 group-hover:rotate-0 group-hover:scale-[1.02]">
-              <div className="flex h-full flex-col overflow-hidden rounded-lg bg-brand p-6 text-snow">
-                <div className="flex items-center justify-between border-b border-snow/30 pb-4 text-[10px] font-bold uppercase tracking-widest">
-                  <span>Velo / Performance</span><span>Menu</span>
+        <div className="flex flex-col">
+          {projects.map((p) => (
+            <div key={p.name} className="group grid overflow-hidden border-t border-snow/15 last:border-b lg:grid-cols-[1.6fr_1fr]">
+              <div className={`relative min-h-[380px] overflow-hidden p-8 sm:min-h-[520px] sm:p-12 ${p.frame}`}>
+                <div className="absolute inset-x-[8%] top-[12%] bottom-0 rotate-[-3deg] rounded-t-xl bg-cream p-3 shadow-2xl transition-transform duration-700 group-hover:rotate-0 group-hover:scale-[1.02]">
+                  <div className={`flex h-full flex-col overflow-hidden rounded-lg p-6 ${p.screen}`}>
+                    <div className="flex items-center justify-between border-b border-current/30 pb-4 text-[10px] font-bold uppercase tracking-widest opacity-80">
+                      <span>{p.label}</span><span>Menu</span>
+                    </div>
+                    <div className="flex flex-1 items-center">
+                      <p className="whitespace-pre-line text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.82] tracking-[-0.07em]">{p.headline}</p>
+                    </div>
+                    <div className="h-14 w-14 rounded-full border border-current opacity-50" />
+                  </div>
                 </div>
-                <div className="flex flex-1 items-center">
-                  <p className="text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.82] tracking-[-0.07em]">MOVE<br />BEYOND.</p>
+              </div>
+              <div className="flex flex-col justify-between px-1 py-8 lg:p-10">
+                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-snow/45">
+                  <span>{p.category}</span><span>{p.year}</span>
                 </div>
-                <div className="h-14 w-14 rounded-full border border-snow/50" />
+                <div className="mt-16 lg:mt-24">
+                  <h3 className="text-4xl font-semibold tracking-[-0.04em]">{p.name}</h3>
+                  <p className="mt-4 max-w-sm leading-relaxed text-snow/50">{p.text}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {p.tags.map((t) => (
+                      <span key={t} className="rounded-full border border-snow/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-snow/60">{t}</span>
+                    ))}
+                  </div>
+                  <a href="#contact" className="mt-8 inline-flex items-center gap-3 border-b border-snow/30 pb-2 text-xs font-bold uppercase tracking-[0.16em] transition-colors hover:border-brand hover:text-brand">
+                    View project <Arrow />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col justify-between px-1 py-8 lg:p-10">
-            <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-snow/45">
-              <span>Brand platform</span><span>2025</span>
-            </div>
-            <div className="mt-24">
-              <h3 className="text-4xl font-semibold tracking-[-0.04em]">Velo Performance</h3>
-              <p className="mt-4 max-w-sm leading-relaxed text-snow/50">
-                Reframing an elite performance brand with a digital experience engineered to inspire motion.
-              </p>
-              <a href="#contact" className="mt-8 inline-flex items-center gap-3 border-b border-snow/30 pb-2 text-xs font-bold uppercase tracking-[0.16em] transition-colors hover:border-brand hover:text-brand">
-                View project <Arrow />
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
       <section id="services" className="border-0 bg-transparent px-5 py-24 shadow-none sm:px-8 lg:px-14 lg:py-36">
         <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
           <div>
-            <p className="mb-4 border-paper bg-transparent text-[47px] font-bold uppercase tracking-[0.2em] text-brand after:mt-1 after:block after:h-px after:w-full after:bg-ink after:content-['']">What we do</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand">What we do</p>
             <h2 className="max-w-md text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">From first thought to finish line.</h2>
           </div>
-          <div className="-mx-[7px] -my-[15px] self-center border-t border-ink/20 lg:-translate-x-12">
+          <div className="self-center border-t border-ink/20">
             {services.map((service) => (
               <article key={service.number} className="group grid gap-5 border-b border-ink/20 py-8 sm:grid-cols-[80px_1fr_1fr] sm:py-10">
                 <span className="font-mono text-xs text-brand">{service.number}</span>
@@ -194,6 +213,130 @@ function Index() {
           <span>© 2025 MOD 12</span>
         </div>
       </footer>
+
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
+          <button aria-label="Close menu" className="absolute inset-0 bg-ink/50" onClick={() => setMenuOpen(false)} />
+          <div className="drawer-in absolute right-0 top-0 flex h-full w-[85%] max-w-sm flex-col bg-ink p-6 text-snow">
+            <div className="flex items-center justify-between">
+              <Wordmark />
+              <button aria-label="Close menu" onClick={() => setMenuOpen(false)} className="flex size-11 items-center justify-center rounded-full border border-snow/25 text-xl">×</button>
+            </div>
+            <nav className="mt-16 flex flex-col gap-6">
+              {[['Work', '#work'], ['Services', '#services'], ['About', '#about'], ['Contact', '#contact']].map(([label, href]) => (
+                <a key={href} href={href} onClick={() => setMenuOpen(false)} className="text-5xl font-semibold tracking-[-0.05em] transition-colors hover:text-brand">{label}</a>
+              ))}
+            </nav>
+            <div className="mt-auto">
+              <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-snow/55">
+                <span className="size-2 rounded-full bg-brand" /> New York / Worldwide
+              </p>
+              <button
+                type="button"
+                onClick={() => { setMenuOpen(false); setInquiryOpen(true) }}
+                className="flex w-full items-center justify-center gap-3 rounded-full bg-brand px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-snow"
+              >
+                Start a project <Arrow />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {inquiryOpen && <InquiryModal onClose={() => setInquiryOpen(false)} />}
     </main>
+  )
+}
+
+const scopes = ['Branding', 'Web design', 'Development', 'Full studio partner']
+const budgets = ['$15k–$30k', '$30k–$60k', '$60k+']
+const timelines = ['ASAP (<1 mo)', '1–3 months', 'Flexible']
+
+function Chips({ label, options, value, onChange, multi }: { label: string; options: string[]; value: string[]; onChange: (v: string[]) => void; multi?: boolean }) {
+  return (
+    <fieldset>
+      <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/55">{label}</legend>
+      <div className="flex flex-wrap gap-2">
+        {options.map((o) => {
+          const active = value.includes(o)
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onChange(multi ? (active ? value.filter((v) => v !== o) : [...value, o]) : [o])}
+              className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${active ? 'border-brand bg-brand text-snow' : 'border-ink/20 hover:border-ink'}`}
+            >
+              {o}
+            </button>
+          )
+        })}
+      </div>
+    </fieldset>
+  )
+}
+
+function InquiryModal({ onClose }: { onClose: () => void }) {
+  const [scope, setScope] = useState<string[]>([])
+  const [budget, setBudget] = useState<string[]>([])
+  const [timeline, setTimeline] = useState<string[]>([])
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [notes, setNotes] = useState('')
+  const [error, setError] = useState('')
+  const [sent, setSent] = useState(false)
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!name.trim() || name.length > 100) return setError('Please enter your name.')
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) || email.length > 255) return setError('Please enter a valid email.')
+    if (scope.length === 0) return setError('Pick at least one scope.')
+    if (notes.length > 1000) return setError('Notes must be under 1000 characters.')
+    setError('')
+    const body = `Name: ${name.trim()}\nEmail: ${email.trim()}\nScope: ${scope.join(', ')}\nBudget: ${budget[0] ?? '-'}\nTimeline: ${timeline[0] ?? '-'}\n\n${notes.trim()}`
+    window.location.href = `mailto:hello@mod12.co?subject=${encodeURIComponent('New project inquiry — ' + name.trim())}&body=${encodeURIComponent(body)}`
+    setSent(true)
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" aria-label="Start a project">
+      <button aria-label="Close" className="absolute inset-0 bg-ink/60" onClick={onClose} />
+      <div className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-[2rem] bg-paper p-6 text-ink sm:rounded-[2rem] sm:p-10">
+        <div className="mb-8 flex items-start justify-between gap-6">
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand">Start a project</p>
+            <h2 className="text-4xl font-semibold tracking-[-0.05em]">{sent ? 'Thanks — talk soon.' : 'Tell us what you’re building.'}</h2>
+          </div>
+          <button aria-label="Close" onClick={onClose} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-ink/20 text-xl">×</button>
+        </div>
+        {sent ? (
+          <div>
+            <p className="max-w-md leading-relaxed text-ink/65">Your email app should have opened with your brief ready to send. We reply within two working days.</p>
+            <button onClick={onClose} className="mt-8 rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-snow">Close</button>
+          </div>
+        ) : (
+          <form onSubmit={submit} className="flex flex-col gap-7">
+            <Chips label="Scope" options={scopes} value={scope} onChange={setScope} multi />
+            <Chips label="Budget" options={budgets} value={budget} onChange={setBudget} />
+            <Chips label="Timeline" options={timelines} value={timeline} onChange={setTimeline} />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <input aria-label="Name" placeholder="Your name" maxLength={100} value={name} onChange={(e) => setName(e.target.value)} className="border-b border-ink/25 bg-transparent py-3 outline-none focus:border-brand" />
+              <input aria-label="Email" type="email" placeholder="Email" maxLength={255} value={email} onChange={(e) => setEmail(e.target.value)} className="border-b border-ink/25 bg-transparent py-3 outline-none focus:border-brand" />
+            </div>
+            <textarea aria-label="Project notes" placeholder="A few words about the project" rows={3} maxLength={1000} value={notes} onChange={(e) => setNotes(e.target.value)} className="resize-none border-b border-ink/25 bg-transparent py-3 outline-none focus:border-brand" />
+            {error && <p className="text-sm font-medium text-brand">{error}</p>}
+            <button type="submit" className="flex items-center justify-center gap-3 self-start rounded-full bg-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-snow transition-transform hover:-translate-y-0.5">
+              Send inquiry <Arrow />
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
   )
 }
