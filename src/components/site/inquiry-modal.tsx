@@ -10,13 +10,14 @@ const budgets = ['$15k–$30k', '$30k–$60k', '$60k+']
 const timelines = ['ASAP (<1 mo)', '1–3 months', 'Flexible']
 
 type Field = 'scope' | 'name' | 'email' | 'notes';
+const fieldOrder: Field[] = ['scope', 'name', 'email', 'notes'];
 type FieldErrors = Partial<Record<Field, string>>;
 const fieldLabel = 'mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-ink/55';
 const fieldControl = 'w-full border-b border-ink/25 bg-transparent py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-paper';
 
 function Chips({ label, options, value, onChange, multi, error }: { label: string; options: string[]; value: string[]; onChange: (v: string[]) => void; multi?: boolean; error?: string | undefined }) {
   return (
-    <fieldset aria-invalid={error ? true : undefined} aria-describedby={error ? 'inquiry-scope-error' : undefined}>
+    <fieldset aria-describedby={error ? 'inquiry-scope-error' : undefined}>
       <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/55">{label}</legend>
       <div className="flex flex-wrap gap-2">
         {options.map((o) => {
@@ -27,8 +28,6 @@ function Chips({ label, options, value, onChange, multi, error }: { label: strin
               type="button"
               aria-pressed={active}
               data-inquiry-field={label === 'Scope' ? 'scope' : undefined}
-              aria-invalid={error ? true : undefined}
-              aria-describedby={error ? 'inquiry-scope-error' : undefined}
               onClick={() => onChange(multi ? (active ? value.filter((v) => v !== o) : [...value, o]) : [o])}
               className={`min-h-11 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${active ? 'border-brand bg-brand text-snow' : 'border-ink/20 hover:border-ink'}`}
             >
@@ -72,13 +71,12 @@ export function InquiryModal({ onClose, onRestoreFocus }: { onClose: () => void;
     })
     if (!parsed.success) {
       const nextErrors: FieldErrors = {};
-      let firstInvalid: Field | undefined;
       for (const issue of parsed.error.issues) {
         const field = issue.path[0];
         if (field !== 'scope' && field !== 'name' && field !== 'email' && field !== 'notes') continue;
         nextErrors[field] ??= issue.message;
-        firstInvalid ??= field;
       }
+      const firstInvalid = fieldOrder.find((field) => nextErrors[field]);
       setErrors(nextErrors);
       requestAnimationFrame(() => {
         if (firstInvalid) formRef.current?.querySelector<HTMLElement>(`[data-inquiry-field="${firstInvalid}"]`)?.focus();
