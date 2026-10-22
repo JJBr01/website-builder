@@ -22,7 +22,7 @@ it('closing the shared inquiry modal restores focus to the actual opening button
   fireEvent.click(opener);
   expect(await screen.findByRole('dialog')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Tell us what you’re building.' })).toHaveFocus();
-  fireEvent.click(screen.getByRole('button', { name: 'Close', exact: true }));
+  fireEvent.click(screen.getByRole('button', { name: /^Close$/ }));
   await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   await waitFor(() => expect(opener).toHaveFocus());
 });
