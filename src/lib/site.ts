@@ -1,4 +1,8 @@
+import { CONTACT_EMAIL } from "@/lib/inquiry";
+import { services } from "@/lib/services";
+
 export const SITE_NAME = "MOD 12";
+export const INK_THEME_COLOR = "oklch(0.18 0 0)";
 // Set to the project's published URL after first publication; change it when a custom domain is connected.
 // No public URL exists yet. Never substitute the editor preview address.
 export const SITE_URL: string = "";
@@ -28,12 +32,12 @@ export function pageHead(path: string, title: string, description: string) {
   };
 }
 
-export const organization = {
+export const professionalService = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   name: SITE_NAME,
   ...(SITE_URL ? { url: SITE_URL, logo: siteUrl("/favicon.ico") } : {}),
-  email: "hello@mod12.co",
+   email: CONTACT_EMAIL,
   areaServed: "Worldwide",
   address: {
     "@type": "PostalAddress",
@@ -42,3 +46,35 @@ export const organization = {
     addressCountry: "US",
   },
 };
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  ...(SITE_URL ? { url: siteUrl("/") } : {}),
+};
+
+export function breadcrumbSchema(path: string, name: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", ...(SITE_URL ? { item: siteUrl("/") } : {}) },
+      { "@type": "ListItem", position: 2, name, ...(SITE_URL ? { item: siteUrl(path) } : {}) },
+    ],
+  };
+}
+
+export const serviceSchemas = services.map((service) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: service.title,
+  description: service.text,
+  provider: professionalService,
+  areaServed: "Worldwide",
+  ...(SITE_URL ? { url: siteUrl("/services") } : {}),
+}));
+
+export function jsonLd(data: unknown) {
+  return { type: "application/ld+json", children: JSON.stringify(data) };
+}
