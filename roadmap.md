@@ -1,6 +1,6 @@
 # Homepage conversion
-- [ ] Add hero inquiry CTA and services link, process strip, shared pricing signal and accessible FAQs with structured data.
-- [ ] Test approved offer facts and verify homepage conversion flows on desktop/mobile.
+- [x] Add hero inquiry CTA and services link, process strip, shared pricing signal and accessible FAQs with structured data.
+- [x] All 16 tests and automatic build pass; verify desktop/mobile hero modal and focus restoration, section order, pricing, accordion keyboard controls, structured data and reduced motion.
 
 # Accessibility and bug fixes
 - [x] Improve inquiry focus, scroll locking, labels, validation, announcements and bounded email fallback.
