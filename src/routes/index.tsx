@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import heroSpeed from "@/assets/hero-speed.jpg";
+import { CONTACT_EMAIL, inquirySchema, inquiryToText, sendInquiry, type Inquiry } from "@/lib/inquiry";
 
 
 export const Route = createFileRoute("/")({
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/")({
       { title: "MOD 12 — Independent Digital Studio" },
       { name: "description", content: "MOD 12 designs and builds high-performing websites for ambitious brands ready to move forward." },
       { property: "og:title", content: "MOD 12 — Ideas built at full speed" },
-      { property: "og:description", content: "Strategy, design and development from an independent digital studio in New York." },
+      { property: "og:description", content: "Strategy, design and development from an independent digital studio in Florida, working with clients everywhere." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -68,6 +69,7 @@ function Index() {
           <div className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.14em] md:flex">
             <a className="transition-opacity hover:opacity-50" href="#services">Services</a>
             <a className="transition-opacity hover:opacity-50" href="#about">About</a>
+            <a className="transition-opacity hover:opacity-50" href="#contact">Contact</a>
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -116,7 +118,7 @@ function Index() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-40" />
                 <span className="relative inline-flex size-2 rounded-full bg-brand" />
               </span>
-              Booking projects for Q2
+              Now booking new projects
             </div>
           </div>
         </div>
@@ -150,12 +152,12 @@ function Index() {
           </div>
           <div className="flex gap-10 border-t border-snow/30 pt-6 lg:block">
             <div className="lg:mb-10">
-              <strong className="block text-4xl font-semibold">24+</strong>
-              <span className="text-xs uppercase tracking-widest text-snow/60">Projects launched</span>
+              <strong className="block text-2xl font-semibold">One point of contact</strong>
+              <span className="text-sm text-snow/70">You work directly with the person building your site.</span>
             </div>
             <div>
-              <strong className="block text-4xl font-semibold">11</strong>
-              <span className="text-xs uppercase tracking-widest text-snow/60">Design awards</span>
+              <strong className="block text-2xl font-semibold">You own everything</strong>
+              <span className="text-sm text-snow/70">Code, content and accounts are yours at launch.</span>
             </div>
           </div>
         </div>
@@ -163,7 +165,7 @@ function Index() {
 
       <footer id="contact" className="bg-ink px-5 pb-8 pt-24 text-snow sm:px-8 lg:px-14 lg:pt-32">
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-brand">Have a project in mind?</p>
-        <a href="mailto:hello@mod12.co" className="group flex items-end justify-between border-b border-snow/25 pb-8">
+        <a href={`mailto:${CONTACT_EMAIL}`} className="group flex items-end justify-between border-b border-snow/25 pb-8">
           <span className="text-[clamp(3rem,8vw,8rem)] font-semibold leading-none tracking-[-0.065em]">Let’s make it move.</span>
           <span className="mb-2 hidden size-16 items-center justify-center rounded-full bg-brand transition-transform group-hover:rotate-[-15deg] sm:flex">
             <Arrow />
@@ -173,8 +175,8 @@ function Index() {
           <div className="text-snow">
             <Wordmark />
           </div>
-          <span>Independent studio · New York / Worldwide</span>
-          <span>© 2025 MOD 12</span>
+          <span>Independent studio · Florida / Remote</span>
+          <span>© {new Date().getFullYear()} MOD 12</span>
         </div>
       </footer>
 
@@ -193,7 +195,7 @@ function Index() {
             </nav>
             <div className="mt-auto">
               <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-snow/55">
-                <span className="size-2 rounded-full bg-brand" /> New York / Worldwide
+                <span className="size-2 rounded-full bg-brand" /> Florida / Remote
               </p>
               <button
                 type="button"
@@ -247,8 +249,11 @@ function InquiryModal({ onClose }: { onClose: () => void }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [notes, setNotes] = useState('')
+  const [company, setCompany] = useState('')
   const [error, setError] = useState('')
+  const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
+  const [fallback, setFallback] = useState<string | null>(null)
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
@@ -256,16 +261,27 @@ function InquiryModal({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!name.trim() || name.length > 100) return setError('Please enter your name.')
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) || email.length > 255) return setError('Please enter a valid email.')
-    if (scope.length === 0) return setError('Pick at least one scope.')
-    if (notes.length > 1000) return setError('Notes must be under 1000 characters.')
+    if (sending) return
+    const parsed = inquirySchema.safeParse({
+      name, email, scope, notes, company,
+      budget: budget[0], timeline: timeline[0],
+    })
+    if (!parsed.success) return setError(parsed.error.issues[0]?.message ?? 'Check the form and try again.')
     setError('')
-    const body = `Name: ${name.trim()}\nEmail: ${email.trim()}\nScope: ${scope.join(', ')}\nBudget: ${budget[0] ?? '-'}\nTimeline: ${timeline[0] ?? '-'}\n\n${notes.trim()}`
-    window.location.href = `mailto:hello@mod12.co?subject=${encodeURIComponent('New project inquiry — ' + name.trim())}&body=${encodeURIComponent(body)}`
-    setSent(true)
+    setSending(true)
+    const data: Inquiry = parsed.data
+    try {
+      const result = await sendInquiry({ data })
+      if (result.ok) return setSent(true)
+      // Email service not set up or it failed: hand the visitor a ready-made email instead of losing the lead.
+      setFallback(`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('New project inquiry from ' + data.name)}&body=${encodeURIComponent(inquiryToText(data))}`)
+    } catch {
+      setFallback(`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('New project inquiry from ' + data.name)}&body=${encodeURIComponent(inquiryToText(data))}`)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -275,13 +291,13 @@ function InquiryModal({ onClose }: { onClose: () => void }) {
         <div className="mb-8 flex items-start justify-between gap-6">
           <div>
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand">Start a project</p>
-            <h2 className="text-4xl font-semibold tracking-[-0.05em]">{sent ? 'Thanks — talk soon.' : 'Tell us what you’re building.'}</h2>
+            <h2 className="text-4xl font-semibold tracking-[-0.05em]">{sent ? 'Inquiry sent.' : 'Tell us what you’re building.'}</h2>
           </div>
           <button aria-label="Close" onClick={onClose} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-ink/20 text-xl">×</button>
         </div>
         {sent ? (
           <div>
-            <p className="max-w-md leading-relaxed text-ink/65">Your email app should have opened with your brief ready to send. We reply within two working days.</p>
+            <p className="max-w-md leading-relaxed text-ink/65">We got your brief and will reply to {email.trim()} within two working days.</p>
             <button onClick={onClose} className="mt-8 rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-snow">Close</button>
           </div>
         ) : (
@@ -294,9 +310,17 @@ function InquiryModal({ onClose }: { onClose: () => void }) {
               <input aria-label="Email" type="email" placeholder="Email" maxLength={255} value={email} onChange={(e) => setEmail(e.target.value)} className="border-b border-ink/25 bg-transparent py-3 outline-none focus:border-brand" />
             </div>
             <textarea aria-label="Project notes" placeholder="A few words about the project" rows={3} maxLength={1000} value={notes} onChange={(e) => setNotes(e.target.value)} className="resize-none border-b border-ink/25 bg-transparent py-3 outline-none focus:border-brand" />
-            {error && <p className="text-sm font-medium text-brand">{error}</p>}
-            <button type="submit" className="flex items-center justify-center gap-3 self-start rounded-full bg-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-snow transition-transform hover:-translate-y-0.5">
-              Send inquiry <Arrow />
+            <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" value={company} onChange={(e) => setCompany(e.target.value)} className="absolute -left-[9999px] size-px opacity-0" />
+            {error && <p role="alert" className="text-sm font-medium text-brand">{error}</p>}
+            {fallback && (
+              <div role="alert" className="rounded-2xl border border-ink/15 p-5 text-sm leading-relaxed">
+                <p className="text-ink/75">The form couldn’t send your inquiry. Your details are ready in an email instead.</p>
+                <a href={fallback} className="mt-3 inline-block font-semibold text-brand underline underline-offset-4">Open it in your email app</a>
+                <p className="mt-2 text-ink/55">Or write to {CONTACT_EMAIL} directly.</p>
+              </div>
+            )}
+            <button type="submit" disabled={sending} className="flex items-center justify-center gap-3 self-start rounded-full bg-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-snow transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0">
+              {sending ? 'Sending…' : <>Send inquiry <Arrow /></>}
             </button>
           </form>
         )}
