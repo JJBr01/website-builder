@@ -1,7 +1,7 @@
 export const SITE_NAME = "MOD 12";
 // Set to the project's published URL after first publication; change it when a custom domain is connected.
 // No public URL exists yet. Never substitute the editor preview address.
-export const SITE_URL = "";
+export const SITE_URL: string = "";
 export const DEFAULT_OG_IMAGE = "/og-image.jpg";
 
 export function siteUrl(path: string) {
