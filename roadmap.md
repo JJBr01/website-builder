@@ -1,7 +1,7 @@
 # Accessibility review follow-up
-- [ ] Correct visual validation focus order and Scope error attributes.
-- [ ] Improve small brand text on ink and remove mismatched button focus offsets.
-- [ ] Add opener restoration regression coverage and run tests; verify browser behavior and automatic build.
+- [x] Correct visual validation focus order and Scope error attributes.
+- [x] Improve small brand text on ink (measured 5.47:1) and remove mismatched button focus offsets.
+- [x] Add actual SiteLayout opener restoration regression coverage; all 17 tests and automatic build pass. Verify desktop/mobile validation order, Scope attributes, hero/footer opener restoration and keyboard-visible outlines.
 
 # Homepage conversion
 - [x] Add hero inquiry CTA and services link, process strip, shared pricing signal and accessible FAQs with structured data.
