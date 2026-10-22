@@ -24,7 +24,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     <SiteInquiryContext.Provider value={startProject}>
     <div className="relative overflow-hidden bg-paper text-ink">
       <a href="#main" className="skip-link">Skip to content</a>
-      <SiteHeader menuButtonRef={menuButtonRef} onStartProject={startProject} onOpenMenu={() => setMenuOpen(true)} />
+      <SiteHeader menuOpen={menuOpen} menuButtonRef={menuButtonRef} onStartProject={startProject} onOpenMenu={() => setMenuOpen(true)} />
       <main id="main" tabIndex={-1} className="bg-paper text-ink outline-none">{children}</main>
       <SiteFooter onStartProject={startProject} />
       {menuOpen && <MobileMenu onClose={closeMenu} onStartProject={startProject} />}

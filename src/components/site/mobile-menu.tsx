@@ -30,7 +30,7 @@ export function MobileMenu({ onClose, onStartProject }: { onClose: () => void; o
   }, []);
   return <div className="fixed inset-0 z-50 md:hidden">
     <div aria-hidden="true" className="absolute inset-0 bg-ink/50" onClick={onClose} />
-    <div ref={drawer} role="dialog" aria-modal="true" aria-label="Menu" className="drawer-in absolute right-0 top-0 flex h-full w-[85%] max-w-sm flex-col overflow-y-auto bg-ink p-6 text-snow">
+    <div id="mobile-menu" ref={drawer} role="dialog" aria-modal="true" aria-label="Menu" className="drawer-in absolute right-0 top-0 flex h-full w-[85%] max-w-sm flex-col overflow-y-auto bg-ink p-6 text-snow">
       <div className="flex items-center justify-between"><Wordmark /><Button variant="site" size="site" aria-label="Close menu" onClick={onClose} className="flex size-11 items-center justify-center rounded-full border border-snow/25 text-xl">×</Button></div>
       <nav aria-label="Primary mobile" className="mt-16 flex flex-col gap-6">
         {([{ to: '/services', name: 'Services' }, { to: '/about', name: 'About' }, { to: '/contact', name: 'Contact' }] as const).map(({ to, name }) => <Link key={to} to={to} onClick={onClose} aria-current={pathname === to ? 'page' : undefined} className="site-nav-link w-fit text-5xl font-semibold tracking-[-0.05em] transition-colors hover:text-brand">{name}</Link>)}

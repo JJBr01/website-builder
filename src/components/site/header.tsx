@@ -3,7 +3,7 @@ import { useEffect, useState, type RefObject } from "react";
 import { Button } from "@/components/ui/button";
 import { Arrow, Wordmark } from "./brand";
 
-export function SiteHeader({ onStartProject, onOpenMenu, menuButtonRef }: { onStartProject: () => void; onOpenMenu: () => void; menuButtonRef: RefObject<HTMLButtonElement | null> }) {
+export function SiteHeader({ onStartProject, onOpenMenu, menuButtonRef, menuOpen }: { onStartProject: () => void; onOpenMenu: () => void; menuButtonRef: RefObject<HTMLButtonElement | null>; menuOpen: boolean }) {
   const { pathname } = useLocation();
   const [pinned, setPinned] = useState(false);
   useEffect(() => {
@@ -24,7 +24,7 @@ export function SiteHeader({ onStartProject, onOpenMenu, menuButtonRef }: { onSt
       </div>
       <div className="flex items-center gap-3">
         <Button variant="site" size="site" type="button" onClick={onStartProject} className="group hidden items-center gap-3 rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-snow transition-transform hover:-translate-y-0.5 sm:flex">Start a project <Arrow /></Button>
-        <Button ref={menuButtonRef} variant="site" size="site" type="button" aria-label="Open menu" onClick={onOpenMenu} className="flex size-11 flex-col items-center justify-center gap-[5px] rounded-full bg-ink md:hidden"><span className="h-[2px] w-5 bg-snow" /><span className="h-[2px] w-5 bg-snow" /></Button>
+        <Button ref={menuButtonRef} variant="site" size="site" type="button" aria-label="Open menu" aria-expanded={menuOpen} aria-controls={menuOpen ? 'mobile-menu' : undefined} onClick={onOpenMenu} className="flex size-11 flex-col items-center justify-center gap-[5px] rounded-full bg-ink md:hidden"><span className="h-[2px] w-5 bg-snow" /><span className="h-[2px] w-5 bg-snow" /></Button>
       </div>
     </nav>
   </header>;
