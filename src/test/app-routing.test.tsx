@@ -18,4 +18,12 @@ describe("App routing", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
     expect(router.matchRoutes("/about").at(-1)?.routeId).toBe("/about");
   });
+  it("matches the Services page at /services", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/services").at(-1)?.routeId).toBe("/services");
+  });
+  it("matches the Contact page at /contact", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/contact").at(-1)?.routeId).toBe("/contact");
+  });
 });

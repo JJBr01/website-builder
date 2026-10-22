@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { pageHead } from "@/lib/site";
+import { breadcrumbSchema, jsonLd, pageHead } from "@/lib/site";
 
 export const Route = createFileRoute("/about")({
-  head: () => pageHead("/about", "About — MOD 12", "Meet Justin James and MOD 12: an independent Florida studio offering direct collaboration, thoughtful web design and performance-minded development for businesses everywhere."),
+  head: () => ({ ...pageHead("/about", "About — MOD 12", "Meet Justin James at MOD 12, an independent Florida studio. Direct collaboration, thoughtful web design and performance-minded development for businesses everywhere."), scripts: [jsonLd(breadcrumbSchema('/about', 'About'))] }),
   component: About,
 });
 
@@ -15,8 +15,8 @@ const principles = [
 
 function About() {
   return (
-    <main className="bg-paper text-ink">
-      <section className="relative px-5 pb-20 pt-44 sm:px-8 sm:pb-24 lg:px-14 lg:pb-32 lg:pt-56">
+    <>
+      <section data-hero className="relative px-5 pb-20 pt-44 sm:px-8 sm:pb-24 lg:px-14 lg:pb-32 lg:pt-56">
         <div aria-hidden="true" className="speed-line absolute right-0 top-0 h-full w-[42%] bg-brand" />
         <div className="relative z-10">
           <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-ink/55"><span className="h-px w-10 bg-brand" />About MOD 12</p>
@@ -36,6 +36,6 @@ function About() {
           <div className="border-t border-snow/20">{principles.map(({ title, text }) => <article key={title} className="grid gap-5 border-b border-snow/20 py-8 sm:grid-cols-2 sm:py-10"><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="text-sm leading-relaxed text-snow/60">{text}</p></article>)}</div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

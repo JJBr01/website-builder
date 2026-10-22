@@ -14,3 +14,6 @@
 - Keep inquiry-modal extraction behavior-identical and leave src/lib/inquiry.ts untouched during presentation changes.
 - Use the site's neutral Button variant and size for existing controls so extraction preserves their original appearance.
 - Centralize public URL and leaf metadata in src/lib/site.ts; keep the URL empty until publication and defer absolute image tags and sitemap setup rather than use preview URLs.
+- Keep one main landmark in SiteLayout; content routes return sections and share its inquiry context rather than create another modal.
+- Share service content through src/lib/services.ts so the home teaser, full services page and structured data stay aligned.
+- Keep the header out of document flow and pin it only after the route's data-hero section; manage drawer keyboard focus and body scrolling independently of inquiry behavior.

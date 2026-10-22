@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# TODO: Add Sitemap: <SITE_URL>/sitemap.xml after the first publication and sitemap setup.

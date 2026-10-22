@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
+import { CONTACT_EMAIL } from "@/lib/inquiry";
 import { Arrow, Wordmark } from "./brand";
 
 export function SiteFooter({ onStartProject }: { onStartProject: () => void }) { return (
@@ -10,11 +12,20 @@ export function SiteFooter({ onStartProject }: { onStartProject: () => void }) {
             <Arrow />
           </span>
         </Button>
+        <div className="mt-10 grid gap-8 border-b border-snow/20 pb-10 sm:grid-cols-2">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-4 text-xs font-semibold uppercase tracking-[0.14em] sm:max-w-xs">
+            <Link to="/" className="hover:text-brand">Home</Link>
+            <Link to="/services" className="hover:text-brand">Services</Link>
+            <Link to="/about" className="hover:text-brand">About</Link>
+            <Link to="/contact" className="hover:text-brand">Contact</Link>
+          </nav>
+          <div className="space-y-4 sm:text-right"><a href={`mailto:${CONTACT_EMAIL}`} className="text-lg underline decoration-brand underline-offset-4">{CONTACT_EMAIL}</a><p className="text-xs font-semibold uppercase tracking-[0.14em] text-snow/60">Florida / Remote</p></div>
+        </div>
         <div className="mt-8 flex flex-col gap-5 text-xs font-semibold uppercase tracking-[0.14em] text-snow/45 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-snow">
             <Wordmark />
           </div>
-          <span>Independent studio · Florida / Remote</span>
+          <span>Independent studio</span>
           <span>© {new Date().getFullYear()} MOD 12</span>
         </div>
       </footer>
