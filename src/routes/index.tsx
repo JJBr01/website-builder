@@ -140,7 +140,7 @@ function Index() {
         </div>
       </section>
 
-      <section id="about" className="mx-3 mb-3 overflow-hidden rounded-[2rem] bg-brand px-5 py-20 text-snow sm:mx-5 sm:px-8 lg:px-14 lg:py-28">
+      <section id="about" className="bg-brand px-5 py-20 text-snow sm:px-8 lg:px-14 lg:py-28">
         <div className="grid items-end gap-16 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
             <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-snow/60">Small team. Serious momentum.</p>
