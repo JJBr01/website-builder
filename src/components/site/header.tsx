@@ -9,7 +9,10 @@ export function SiteHeader({ onStartProject, onOpenMenu, menuButtonRef, menuOpen
   useEffect(() => {
     const update = () => {
       const hero = document.querySelector('[data-hero]');
-      setPinned(hero ? hero.getBoundingClientRect().bottom <= 100 : window.scrollY > 100);
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const heroEnd = hero ? hero.getBoundingClientRect().bottom + window.scrollY - 100 : 100;
+      const threshold = Math.min(heroEnd, maxScroll);
+      setPinned(window.scrollY > 0 && window.scrollY >= threshold - 1);
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
