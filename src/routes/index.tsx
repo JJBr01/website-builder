@@ -1,11 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-const projects = [
-  { name: 'Velo Performance', category: 'Brand platform', year: '2025', label: 'Velo / Performance', headline: 'MOVE\nBEYOND.', frame: 'bg-stone', screen: 'bg-brand text-snow', tags: ['Strategy', 'Web design', 'Development'], text: 'Reframing an elite performance brand with a digital experience engineered to inspire motion.' },
-  { name: 'Kroma Labs', category: 'AI product site', year: '2025', label: 'Kroma / Studio', headline: 'SEE IN\nCOLOR.', frame: 'bg-brand', screen: 'bg-ink text-snow', tags: ['Product design', 'Interaction', 'Launch'], text: 'A launch site for a generative imaging studio, built around live, playable previews of the product.' },
-  { name: 'Arcadia Capital', category: 'Fintech identity', year: '2024', label: 'Arcadia / Capital', headline: 'QUIET\nCAPITAL.', frame: 'bg-snow/10', screen: 'bg-paper text-ink', tags: ['Branding', 'Editorial', 'Web design'], text: 'An editorial, data-forward presence for a boutique investment firm that wanted to feel calm and certain.' },
-]
 
 export const Route = createFileRoute("/")({
   head: () => ({
