@@ -14,4 +14,8 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+  it("matches the About page at /about", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/about").at(-1)?.routeId).toBe("/about");
+  });
 });
