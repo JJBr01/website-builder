@@ -1,3 +1,8 @@
+# Accessibility review follow-up
+- [ ] Correct visual validation focus order and Scope error attributes.
+- [ ] Improve small brand text on ink and remove mismatched button focus offsets.
+- [ ] Add opener restoration regression coverage and run tests; verify browser behavior and automatic build.
+
 # Homepage conversion
 - [x] Add hero inquiry CTA and services link, process strip, shared pricing signal and accessible FAQs with structured data.
 - [x] All 16 tests and automatic build pass; verify desktop/mobile hero modal and focus restoration, section order, pricing, accordion keyboard controls, structured data and reduced motion.

@@ -32,7 +32,7 @@ function About() {
       </section>
       <section className="bg-ink px-5 py-24 text-snow sm:px-8 lg:px-14 lg:py-36">
         <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
-          <div><p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand">How we work</p><h2 className="max-w-md text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">Less friction.<br />More progress.</h2></div>
+          <div><p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-on-dark">How we work</p><h2 className="max-w-md text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">Less friction.<br />More progress.</h2></div>
           <div className="border-t border-snow/20">{principles.map(({ title, text }) => <article key={title} className="grid gap-5 border-b border-snow/20 py-8 sm:grid-cols-2 sm:py-10"><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="text-sm leading-relaxed text-snow/60">{text}</p></article>)}</div>
         </div>
       </section>

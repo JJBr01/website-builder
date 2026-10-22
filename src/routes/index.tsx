@@ -66,7 +66,7 @@ function Index() {
       <section id="services" className="bg-ink px-5 py-24 text-snow sm:px-8 lg:px-14 lg:py-36">
         <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
           <div>
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand">What we do</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-on-dark">What we do</p>
             <h2 className="max-w-md text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">From first thought to finish line.</h2>
             <Link to="/services" className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-snow underline decoration-brand underline-offset-8">See all services <span aria-hidden="true">→</span></Link>
             <p className="mt-5 text-sm leading-relaxed text-snow/80">{projectPriceSignal}</p>
@@ -74,7 +74,7 @@ function Index() {
           <div className="self-center border-t border-snow/20">
             {services.map((service) => (
               <article key={service.number} className="group grid gap-5 border-b border-snow/20 py-8 sm:grid-cols-[80px_1fr_1fr] sm:py-10">
-                <span className="font-mono text-xs text-brand">{service.number}</span>
+                <span className="font-mono text-xs text-brand-on-dark">{service.number}</span>
                 <h3 className="text-2xl font-semibold tracking-[-0.03em] motion-safe:transition-transform motion-safe:group-hover:translate-x-1">{service.title}</h3>
                 <p className="text-sm leading-relaxed text-snow/60">{service.text}</p>
               </article>
