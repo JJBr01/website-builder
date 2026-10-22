@@ -1,6 +1,16 @@
-# Website Builder
+# MOD 12 website
 
-build out this websitye
+Marketing site for MOD 12, an independent digital studio.
+
+## Inquiry form email
+
+The "Start a project" form sends through [Resend](https://resend.com). Set these environment variables wherever the site is hosted:
+
+- `RESEND_API_KEY` (required): API key from Resend.
+- `INQUIRY_FROM_EMAIL` (optional): sender, e.g. `MOD 12 <site@mod12.co>`. Needs a domain verified in Resend. Defaults to Resend's test sender.
+- `INQUIRY_TO_EMAIL` (optional): where inquiries go. Defaults to `CONTACT_EMAIL` in `src/lib/inquiry.ts`.
+
+Without `RESEND_API_KEY`, the form still works: it shows visitors a prefilled email link so no inquiry is lost.
 
 This project was built with [Lovable](https://lovable.dev).
 
