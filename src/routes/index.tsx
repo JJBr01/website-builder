@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import heroSpeed from "@/assets/hero-speed-alt.jpg";
+import heroSpeed from "@/assets/hero-speed.jpg";
 
 
 export const Route = createFileRoute("/")({
