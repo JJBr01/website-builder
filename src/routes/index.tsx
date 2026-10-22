@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import heroSpeed from "@/assets/hero-speed.jpg";
 
 
 export const Route = createFileRoute("/")({
@@ -89,6 +90,15 @@ function Index() {
         </nav>
 
         <div className="relative z-10 flex min-h-[calc(92vh-92px)] flex-col justify-end pt-24">
+          <div className="my-auto w-full py-6 sm:py-10">
+            <img
+              src={heroSpeed}
+              alt="Long-exposure red and black motion streaks racing across a warm paper background"
+              width={1600}
+              height={800}
+              className="h-[20vh] w-full rounded-[1.5rem] object-cover object-center ring-1 ring-ink/10 sm:h-[26vh] lg:h-[30vh]"
+            />
+          </div>
           <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-ink/55">
             <span className="h-px w-10 bg-brand" />
             Independent digital studio
