@@ -1,9 +1,6 @@
 export const projectStartingPrice = 15000;
 export const projectPriceSignal = `Projects typically start at $${projectStartingPrice / 1000}k.`;
 
-export const inquiryReplyWorkingDays = 2;
-export const typicalProjectMonths = { minimum: 1, maximum: 3 };
-
 export const inquirySteps = [
   { number: '01', title: 'Inquiry', text: "Tell us what you're building. You'll hear back within two working days." },
   { number: '02', title: 'Scoping call', text: 'A direct conversation about goals, scope, budget and timeline, then a clear proposal.' },
