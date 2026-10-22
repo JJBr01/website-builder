@@ -177,7 +177,7 @@ function Index() {
               <button aria-label="Close menu" onClick={() => setMenuOpen(false)} className="flex size-11 items-center justify-center rounded-full border border-snow/25 text-xl">×</button>
             </div>
             <nav className="mt-16 flex flex-col gap-6">
-              {[['Work', '#work'], ['Services', '#services'], ['About', '#about'], ['Contact', '#contact']].map(([label, href]) => (
+              {[['Services', '#services'], ['About', '#about'], ['Contact', '#contact']].map(([label, href]) => (
                 <a key={href} href={href} onClick={() => setMenuOpen(false)} className="text-5xl font-semibold tracking-[-0.05em] transition-colors hover:text-brand">{label}</a>
               ))}
             </nav>
