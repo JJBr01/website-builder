@@ -80,12 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "MOD 12" },
       { name: "description", content: "MOD 12 independent digital studio" },
-      { name: "author", content: "Lovable" },
+      { name: "author", content: "MOD 12" },
       { property: "og:title", content: "MOD 12" },
       { property: "og:description", content: "MOD 12 independent digital studio" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
