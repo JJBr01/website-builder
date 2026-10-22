@@ -59,6 +59,8 @@ const Wordmark = () => (
 )
 
 function Index() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [inquiryOpen, setInquiryOpen] = useState(false)
   return (
     <main className="overflow-hidden bg-paper text-ink">
       <section className="relative min-h-[92vh] px-5 pb-12 pt-5 sm:px-8 lg:px-14 lg:pb-16">
