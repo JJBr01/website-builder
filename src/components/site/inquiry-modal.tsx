@@ -14,7 +14,7 @@ type FieldErrors = Partial<Record<Field, string>>;
 const fieldLabel = 'mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-ink/55';
 const fieldControl = 'w-full border-b border-ink/25 bg-transparent py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-paper';
 
-function Chips({ label, options, value, onChange, multi, error }: { label: string; options: string[]; value: string[]; onChange: (v: string[]) => void; multi?: boolean; error?: string }) {
+function Chips({ label, options, value, onChange, multi, error }: { label: string; options: string[]; value: string[]; onChange: (v: string[]) => void; multi?: boolean; error?: string | undefined }) {
   return (
     <fieldset aria-invalid={error ? true : undefined} aria-describedby={error ? 'inquiry-scope-error' : undefined}>
       <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/55">{label}</legend>
