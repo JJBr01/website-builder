@@ -15,11 +15,15 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const inquiryOpenerRef = useRef<HTMLElement | null>(null);
   const closeMenu = () => {
     setMenuOpen(false);
     menuButtonRef.current?.focus();
   };
-  const startProject = () => setInquiryOpen(true);
+  const startProject = () => {
+    inquiryOpenerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setInquiryOpen(true);
+  };
   return (
     <SiteInquiryContext.Provider value={startProject}>
     <div className="relative overflow-hidden bg-paper text-ink">
@@ -28,7 +32,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <main id="main" tabIndex={-1} className="bg-paper text-ink outline-none">{children}</main>
       <SiteFooter onStartProject={startProject} />
       {menuOpen && <MobileMenu onClose={closeMenu} onStartProject={startProject} />}
-      {inquiryOpen && <InquiryModal onClose={() => setInquiryOpen(false)} />}
+      {inquiryOpen && <InquiryModal onClose={() => setInquiryOpen(false)} onRestoreFocus={() => inquiryOpenerRef.current?.focus()} />}
     </div>
     </SiteInquiryContext.Provider>
   );

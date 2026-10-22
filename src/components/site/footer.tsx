@@ -8,7 +8,7 @@ export function SiteFooter({ onStartProject }: { onStartProject: () => void }) {
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-brand">Have a project in mind?</p>
         <Button variant="site" size="site" onClick={onStartProject} className="group flex h-auto w-full items-end justify-between whitespace-normal rounded-none bg-transparent text-left text-snow border-b border-snow/25 pb-8">
           <span className="text-[clamp(3rem,8vw,8rem)] font-semibold leading-none tracking-[-0.065em]">Let’s make it move.</span>
-          <span className="mb-2 hidden size-16 items-center justify-center rounded-full bg-brand transition-transform group-hover:rotate-[-15deg] sm:flex">
+          <span className="mb-2 hidden size-16 items-center justify-center rounded-full bg-brand motion-safe:transition-transform motion-safe:group-hover:rotate-[-15deg] sm:flex">
             <Arrow />
           </span>
         </Button>

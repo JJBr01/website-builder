@@ -17,3 +17,5 @@
 - Keep one main landmark in SiteLayout; content routes return sections and share its inquiry context rather than create another modal.
 - Share service content through src/lib/services.ts so the home teaser, full services page and structured data stay aligned.
 - Keep the header out of document flow and pin it only after the route's data-hero section; manage drawer keyboard focus and body scrolling independently of inquiry behavior.
+- Use Radix dialog primitives for inquiry focus containment and dismissal, with SiteLayout restoring the captured opener; keep sending logic unchanged to preserve delivery behavior.
+- Keep bounded mailto fallback construction in a browser-safe inquiry-form helper so failure paths share one encoding implementation.
